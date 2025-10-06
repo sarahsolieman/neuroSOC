@@ -39,3 +39,66 @@ neuroSOC enhances SOC efficiency by combining incident data with internal playbo
 - **Automated incident summaries** – Converts raw alerts into structured insights.  
 - **Knowledge transparency** – Displays which sources informed each recommendation.  
 - **Interactive UI** – Streamlit-based demo for quick visualization and testing.
+
+
+Incident Logs → Embedding Generator → FAISS Index
+↓
+Similarity Search
+↓
+Retrieved Playbooks + Logs
+↓
+LLM (Demo Frozen)
+↓
+Summary + Root Cause + Mitigation (Static Output)
+
+
+---
+
+## Tech Stack
+
+- **Python**  
+- **FAISS** – Vector similarity search  
+- **OpenAI / Bedrock APIs** – (used only in full version)  
+- **Streamlit** – Web demo interface  
+- **pandas / json** – Log parsing  
+
+---
+
+## Example Prompt (Full Version)
+
+**System:**  
+You are an expert SOC analyst who summarizes and contextualizes security incidents.  
+Be concise, technical, and actionable.
+
+**User:**  
+Here are raw logs and the top 3 relevant playbooks.
+
+Logs:
+{incident_logs}
+
+Playbooks:
+{retrieved_docs}
+
+
+**Task:**  
+1. Summarize the likely incident type.  
+2. Identify affected assets or users.  
+3. Recommend remediation and next steps.  
+4. Include references to the playbooks used.
+
+---
+
+## Future Roadmap
+
+- Integrate live SIEM / Splunk ingestion  
+- Add threat-intel enrichment (VirusTotal, AbuseIPDB)  
+- Deploy to AWS Lambda + Step Functions for full automation  
+- Fine-tune small models for on-prem SOCs  
+
+---
+
+## Impact
+
+**neuroSOC** demonstrates how retrieval-augmented LLMs can enhance security operations by transforming noisy incident data into **actionable intelligence** — automating first-level triage and empowering analysts for deeper reasoning.
+
+
