@@ -5,6 +5,7 @@ import numpy as np
 import openai
 from pathlib import Path
 
+DEMO_MODE = False
 openai.api_key = os.getenv("OPENAI_API_KEY")
 EMBED_MODEL = "text-embedding-3-small"
 LLM_MODEL = "gpt-4o-mini"
@@ -81,3 +82,46 @@ if __name__ == "__main__":
         case = json.load(f)
     log_text = "\n".join([str(e) for e in case["timeline"]])
     print(run_pipeline(log_text))
+
+
+# Demo Mode Helper Function
+
+import os
+import json
+from pathlib import Path
+
+def save_demo_artifacts(summary_text, docs=None, faiss_index=None):
+    """
+    Saves the current pipeline outputs so they can be reused in demo mode.
+
+    Creates a 'demo/' folder (if it doesn’t exist) and writes:
+      - summary.md     : the generated summary
+      - docs.json      : the document chunks used to build the index (optional)
+      - index.faiss    : the FAISS index file (optional)
+    """
+
+    demo_dir = Path("demo")
+    demo_dir.mkdir(exist_ok=True)
+
+    # 1. Save the summary text
+    summary_path = demo_dir / "summary.md"
+    summary_path.write_text(summary_text)
+    print(f"[✓] Saved summary to {summary_path}")
+
+    # 2. Save document chunks (if provided)
+    if docs is not None:
+        docs_path = demo_dir / "docs.json"
+        docs_path.write_text(json.dumps(docs, indent=2))
+        print(f"[✓] Saved docs to {docs_path}")
+
+    # 3. Save FAISS index (if provided)
+    if faiss_index is not None:
+        try:
+            import faiss
+            index_path = demo_dir / "index.faiss"
+            faiss.write_index(faiss_index, str(index_path))
+            print(f"[✓] Saved FAISS index to {index_path}")
+        except ImportError:
+            print("[!] FAISS not installed — skipped saving index.")
+
+    print("[✓] Demo artifacts saved successfully.")
