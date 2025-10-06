@@ -1,2 +1,2 @@
 # neuroSOC
-RAG powered incident response assistant for modern SOCs
+Prototype - RAG powered incident response assistant for modern SOCs
