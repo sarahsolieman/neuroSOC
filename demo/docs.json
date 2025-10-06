@@ -1,0 +1,18 @@
+[
+  {
+    "title": "playbook_phishing",
+    "content": "# Playbook: Phishing Response\n## Description\nEmail-based attacks lure users into credential theft or malware downloads.\n\n## Detection\n- Suspicious domains or file attachments.\n- User reports of fake login pages.\n\n## Response\n1. Block sender and domain.\n2. Scan endpoints for downloaded files.\n3. Notify impacted users.\n4. Reset passwords if credentials entered.\n\n## Recovery\nRun awareness training to prevent recurrence.\n"
+  },
+  {
+    "title": "playbook_privilege_escalation",
+    "content": "# Playbook: Privilege Escalation\n## Description\nAttackers often elevate privileges after gaining initial access.\n\n## Detection\n- Creation of new admin users.\n- Use of PowerShell with encoded commands.\n\n## Response\n1. Review event logs for new user creation.\n2. Reset admin credentials.\n3. Monitor for lateral movement.\n\n## Recovery\nEnsure endpoint hardening and least-privilege policies are enforced.\n"
+  },
+  {
+    "title": "playbook_authentication",
+    "content": "# Playbook: Authentication Anomalies\n## Description\nBrute-force and credential-stuffing attacks target login endpoints with repeated password attempts.\n\n## Detection\n- Multiple failed logins for the same user or IP within short windows.\n- Successful login after many failures.\n\n## Response\n1. Block offending IPs or throttle login attempts.\n2. Force password resets for affected accounts.\n3. Review MFA enforcement and password policy.\n\n## Recovery\nConfirm no privilege escalation or lateral movement occurred post-login.\n"
+  },
+  {
+    "title": "playbook_malware_execution",
+    "content": "# Playbook: Malware Execution\n## Description\nMalicious binaries or scripts executed on endpoints may install backdoors or steal data.\n\n## Detection\n- Unexpected process creation (cmd.exe, powershell.exe).\n- Network calls to unknown IPs post file execution.\n\n## Response\n1. Isolate affected endpoint from the network.\n2. Delete malicious binaries.\n3. Collect hash and submit to VirusTotal.\n4. Block associated C2 domains.\n\n## Recovery\nReimage affected devices if persistence is found.\n"
+  }
+]
