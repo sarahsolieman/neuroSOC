@@ -40,18 +40,6 @@ neuroSOC enhances SOC efficiency by combining incident data with internal playbo
 - **Knowledge transparency** – Displays which sources informed each recommendation.  
 - **Interactive UI** – Streamlit-based demo for quick visualization and testing.
 
-Incident Logs  →  Embedding Generator  →  FAISS Index
-                          ↓
-                   Similarity Search
-                          ↓
-             Retrieved Playbooks + Logs
-                          ↓
-                  LLM (Claude / GPT / Bedrock)
-                          ↓
-            Summary + Root Cause + Mitigation
-
----
-
 ## Tech Stack
 
 - **Python**  
