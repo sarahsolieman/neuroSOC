@@ -7,7 +7,7 @@ import time
 # Force demo mode for Streamlit app
 os.environ["DEMO_MODE"] = "True"
 
-# ---- Demo JSON Log ----
+# Demo JSON Log 
 demo_log = {
     "events": [
         {"event": "failed_login", "username": "admin", "source_ip": "192.168.1.5", "timestamp": "2024-07-01T08:45:21Z"},
@@ -16,10 +16,10 @@ demo_log = {
     ]
 }
 
-# ---- Page Config ----
+#  Page Config 
 st.set_page_config(page_title="NeuroSOC | AI-Augmented SOC", page_icon="🧠", layout="wide")
 
-# ---- Custom Styling ----
+# Custom Styling
 st.markdown("""
 <style>
 body { background-color: #0B0C10; color: #E6E6E6; }
@@ -176,12 +176,12 @@ textarea, input[type="file"], button { font-size: 1.05rem !important; }
 </style>
 """, unsafe_allow_html=True)
 
-# ---- Header ----
+# Header 
 st.markdown("<h1>🧠 NeuroSOC</h1>", unsafe_allow_html=True)
 st.markdown("<h3>Adaptive AI for Security Operations</h3>", unsafe_allow_html=True)
 st.divider()
 
-# ---- Layout ----
+#  Layout 
 col1, col2 = st.columns([1.3, 1.2])
 
 with col1:
@@ -199,7 +199,7 @@ with col1:
     </div>
     """, unsafe_allow_html=True)
 
-    # ✅ Default demo ON
+    # Default demo ON
     use_demo = st.toggle("", value=True, label_visibility="collapsed")
 
     if use_demo:
