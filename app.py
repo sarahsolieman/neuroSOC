@@ -179,6 +179,15 @@ textarea, input[type="file"], button { font-size: 1.05rem !important; }
 # Header 
 st.markdown("<h1>🧠 NeuroSOC</h1>", unsafe_allow_html=True)
 st.markdown("<h3>Adaptive AI for Security Operations</h3>", unsafe_allow_html=True)
+st.markdown("""
+<h1 style="display:flex; justify-content:space-between; align-items:center;">
+  <a href="https://github.com/sarahsolieman/neuroSOC" target="_blank"
+     style="text-decoration:none; font-size:0.9rem; color:#00E6E2; border:1px solid #00C6C2; 
+            padding:6px 10px; border-radius:6px; background-color:rgba(0,198,194,0.12);">
+     View Code →
+  </a>
+</h1>
+""", unsafe_allow_html=True)
 st.divider()
 
 #  Layout 
